@@ -38,7 +38,7 @@
     </header>
 
     <div class="add-rec d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a class="" href="#"><button type="button" class="btn btn-outline-dark me-2">Add Recipe</button></a>
+        <a class="" href="add.php"><button type="button" class="btn btn-outline-dark me-2">Add Recipe</button></a>
     </div>
     <!-- section 2-cards -->
     <div class="album py-5 bg-light">
