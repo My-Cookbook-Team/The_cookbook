@@ -14,8 +14,8 @@ CREATE TABLE Recipe (
    username  varchar(40),
    rtitle varchar(100)not null,
    rServNum int default null,
-   rCookTime varchar default null,  /*for minutes*/
-   rSteps  varchar(1200),
+   HCookTime varchar default null,  /*for hours*/
+   MCookTime varchar default null,  /*for minutes*/
    rcategory varchar(255) not null,
    author varchar(255) not null,
    primary key (rid), 
@@ -43,8 +43,16 @@ CREATE TABLE Bookmark(
    foreign key (bname) references Users(username)
 )
 
+CREATE TABLE Steps(   
+   rid     MEDIUMINT  not null, 
+   s_id    MEDIUMINT  not null,
+   s_description TEXT not null,
+   primary key (rid, step_id),
+   foreign key (rid) references Recipe(rid),   
+)
+
 copy the folder and paste it in C:\xampp\htdocs\folder_name
 
 start xamp and turn on apache and mysql server
 
-go to browser and redireect to localhost/folder_name
+go to browser and redirect to localhost/folder_name

@@ -145,11 +145,12 @@
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Preparation Time</label>
-                                <input type="number" class="form-control" id="prep_time" min="0" max="23" placeholder="Hours" required>
+                                <input type="number" class="form-control" id="prep_time_hours" min="0" max="23" placeholder="Hours" required>
 
                             </div>
                             <div class="col-md-3">
                                 <label for="zip" class="form-label text-white">.</label>
+                                <input type="number" class="form-control" id="prep_time_mins" min="0" max="59" placeholder="Minutes" required>
                             </div>
 
                         </div>
@@ -175,7 +176,7 @@
         </main>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">&copy; Powered by a <a href="https://c.tenor.com/sXIEfXP-VQAAAAAM/hamster-hamster-wheel.gif"> Small Hamster</a></p>
+            <p class="mb-1">&copy; Powered by a <a href="images/hamster.gif" target="_blank" rel="noopener noreferrer"> small hamster</a></p>
         </footer>
     </div>
 
