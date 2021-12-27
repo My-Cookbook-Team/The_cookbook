@@ -23,7 +23,7 @@ CREATE TABLE Recipe (
 
 CREATE TABLE Ingredients (
    rid MEDIUMINT  not null,
-   Ingredient text,
+   Ingredient TEXT not null,
    primary key (rid),
    foreign key (rid) references Recipe(rid)
 )
