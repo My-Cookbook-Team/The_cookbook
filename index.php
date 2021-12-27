@@ -111,9 +111,9 @@ if (isset($_POST['showall'])) {
 
         </ul>
 
-        <form class="col-12 col-lg-3 mb-3 mb-lg-0 me-lg-3">
+        <!-- <form class="col-12 col-lg-3 mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-        </form>
+        </form> -->
 
         <div class="text-end">
           <a class="" href="index.php?logout='1'"><button type="button" class="btn btn-outline-light me-2">Log out</button></a>
