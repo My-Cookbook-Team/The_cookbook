@@ -133,18 +133,18 @@ if (isset($_POST['showall'])) {
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner p-5">
               <div class="carousel-item active">
-                <img src="images/drink.svg" class="d-block m-auto" width="200p" height="100px" alt="...">
+                <img src="images/1.jpg" class="d-block m-auto" alt="...">
                 <div class=" d-none text-dark text-center d-md-block ">
-                  <h5>&nbsp&nbsp&nbsp Drinks</h5>
+                  <h5>&nbsp&nbsp&nbsp Poached Egg with herbs</h5>
                   <p>Some representative placeholder content for the second slide.</p>
                 </div>
 
               </div>
 
               <div class="carousel-item">
-                <img src="images/fruit-basket.svg" class="d-block m-auto" width="200p" height="100px" alt="...">
+                <img src="images/2.jpg" class="d-block m-auto" alt="...">
                 <div class=" d-none text-dark text-center d-md-block ">
-                  <h5>Vegetarian</h5>
+                  <h5>Pasta With Tomato and Basil</h5>
                   <p>Some representative placeholder content for the second slide.</p>
                 </div>
               </div>
@@ -172,7 +172,7 @@ if (isset($_POST['showall'])) {
 
     </div>
     <div class="container">
-      <h3 class="py-3 main-header text-decoration-underline">Browse</h3>
+
 
       <!-- categories -->
       <div class="container marketing">
@@ -180,28 +180,20 @@ if (isset($_POST['showall'])) {
           <!-- Three columns of text below the carousel -->
           <div class="row">
             <div class="col-lg-4">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-              </svg>
+
+              <img src="images/fruit-basket.svg" class="d-block m-auto round" width="140" height="140" alt="...">
 
               <h2>Vegetarian</h2>
               <button class="btn btn-secondary" name="veg" type="submit">Show Recipes&raquo;</button>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-              </svg>
+              <img src="images/meatball.svg" class="d-block m-auto round" width="140" height="140" alt="...">
 
               <h2>Non Vegetarian</h2>
               <button class="btn btn-secondary" name="nonveg" type="submit">Show Recipes&raquo;</button>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-              </svg>
+              <img src="images/drink.svg" class="d-block m-auto round" width="140" height="139" alt="...">
 
               <h2>Drinks</h2>
               <button class="btn btn-secondary" name="drinks" type="submit">Show Recipes&raquo;</button>
@@ -232,6 +224,7 @@ if (isset($_POST['showall'])) {
 
     </div>
     <!-- section 3-cards -->
+    <h3 class="py-3 main-header text-decoration-underline">Browse</h3>
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
