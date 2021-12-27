@@ -21,25 +21,11 @@ CREATE TABLE Recipe (
    foreign key (username) references Users(username)
 )
 
-CREATE TABLE Ingredient (
-   iid MEDIUMINT not null AUTO_INCREMENT,
+CREATE TABLE Ingredients (
    rid MEDIUMINT  not null,
-   Iname varchar(100),
-   Iqty float,
-   Unit  varchar(100),
-   primary key (iid),
-   foreign key (rid) references Recipe(rid),
-   foreign key (Unit) references UnitConversion(Unit)
-
-)
-
-CREATE TABLE Bookmark(   
-   booNum  MEDIUMINT not null AUTO_INCREMENT,  
-   rid     MEDIUMINT  not null, 
-   bname    varchar(40) not null,
-   primary key (booNum),   
-   foreign key (rid) references Recipe(rid),   
-   foreign key (bname) references Users(username)
+   Ingredient text,
+   primary key (rid),
+   foreign key (rid) references Recipe(rid)
 )
 
 CREATE TABLE Steps(   
