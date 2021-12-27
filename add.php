@@ -1,3 +1,39 @@
+<?php
+session_start();
+$conn = mysqli_connect('localhost', 'root', '', 'regis');
+
+$title = $servings = $preptime = $category = $steps = '';
+
+if (isset($_POST['checkout'])) {
+
+
+    // escape sql chars
+    $title = mysqli_real_escape_string($conn, $_POST['rtitle']);
+    $author = mysqli_real_escape_string($conn, $_POST['username']);
+    $servings = mysqli_real_escape_string($conn, $_POST['rServNum']);
+    $preptimeh = mysqli_real_escape_string($conn, $_POST['rCookTimeh']);
+    $preptimem = mysqli_real_escape_string($conn, $_POST['rCookTimem']);
+    $category = mysqli_real_escape_string($conn, $_POST['rcategory']);
+    $steps = mysqli_real_escape_string($conn, $_POST['steps']);
+    $intro =  mysqli_real_escape_string($conn, $_POST['rintro']);
+
+    $username = $_SESSION['username'];
+
+
+    // create sql
+    $sql = "INSERT INTO recipe(username ,rtitle,rServNum,rCookTimeh,rCookTimem,rcategory,steps,rintro) VALUES('$username','$title','$servings','$preptimeh','$preptimem','$category','$steps','$intro')";
+
+    // save to db and check
+    if (mysqli_query($conn, $sql)) {
+        // success
+        header('Location: recipe.php');
+    } else {
+        echo 'query error: ' . mysqli_error($conn);
+    }
+} // end POST check
+
+?>
+
 <html lang="en">
 
 <head>
@@ -89,7 +125,7 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="index.php" class="nav-link px-2 text-white">Home</a></li>
                 <li><a href="recipe.php" class="nav-link px-2 text-white">My Recipes</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Bookmarks</a></li>
+
             </ul>
 
 
@@ -111,22 +147,22 @@
 
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3 ">Recipe Details</h4>
-                    <form class="needs-validation" novalidate>
+                    <form action="add.php" method="POST">
                         <div class="row g-3">
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Recipe Title</label>
-                                <input type="text" class="form-control" id="recipe_title" placeholder="" value="" required>
+                                <input type="text" class="form-control" name="rtitle" id="recipe_title" placeholder="" value="" required>
 
                             </div>
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Recipe Author</label>
-                                <input type="text" class="form-control" id="recipe_author" placeholder="" value="" required>
-
+                                <input type="text" class="form-control" name="username" id="recipe_author" placeholder="" value="<?php echo $_SESSION['username']; ?>" readonly>
+                                username
                             </div>
 
                             <div class="col-md-4">
                                 <label for="state" class="form-label">Category</label>
-                                <select class="form-select" id="category" required>
+                                <select class="form-select" id="category" name="rcategory" required>
                                     <option value="">Choose...</option>
                                     <option>Vegetarian</option>
                                     <option>Non-Vegetarian</option>
@@ -137,7 +173,7 @@
 
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Servings</label>
-                                <input type="number" class="form-control" id="serving" min="1" max="999" placeholder="" required>
+                                <input type="number" class="form-control" name="rServNum" id="serving" min="1" max="999" placeholder="" required>
 
                             </div>
                         </div>
@@ -145,30 +181,32 @@
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Preparation Time</label>
-                                <input type="number" class="form-control" id="prep_time_hours" min="0" max="23" placeholder="Hours" required>
+                                <input type="number" class="form-control" name="rCookTimeh" id="cooktime" min="0" max="23" placeholder="Hours" required>
 
                             </div>
                             <div class="col-md-3">
                                 <label for="zip" class="form-label text-white">.</label>
-                                <input type="number" class="form-control" id="prep_time_mins" min="0" max="59" placeholder="Minutes" required>
+                                <input type="number" class="form-control" name="rCookTimem" id="prep_time_mins" min="0" max="59" placeholder="Minutes" required>
                             </div>
 
                         </div>
                         <br>
                         <div class="col-12">
+                            <label for="zip" class="form-label">Introduction Text</label>
+                            <input type="text" class="form-control" name="rintro" id="Intro" placeholder="Introduction" required>
+
+                        </div>
+                        <br>
+                        <div class="col-12">
                             <label for="zip" class="form-label">Instructions</label>
-                            <input type="number" class="form-control" id="prep_time" min="0" max="59" placeholder="" required>
+                            <input type="text" class="form-control" name="steps" id="Instructions" placeholder="Instrcutions" required>
 
                         </div>
                         <br>
 
 
 
-
-
-
-
-                        <button class="w-50 btn btn-outline-primary btn-lg" type="submit">Continue to checkout</button>
+                        <button class="w-50 btn btn-outline-primary btn-lg" name="checkout" type="submit">Checkout</button>
                     </form>
                 </div>
 
