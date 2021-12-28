@@ -118,25 +118,18 @@ if ($conn->connect_error) {
               <div class="carousel-item active">
                 <img src="images/1.jpg" class="d-block m-auto rounded" alt="...">
                 <div class=" d-none text-dark text-center d-md-block ">
-                  <h5>&nbsp&nbsp&nbsp Poached Egg with herbs</h5>
-                  <p>Some representative placeholder content for the second slide.</p>
                 </div>
-
               </div>
 
               <div class="carousel-item">
                 <img src="images/2.jpg" class="d-block m-auto rounded" alt="...">
                 <div class=" d-none text-dark text-center d-md-block ">
-                  <h5>Pasta With Tomato and Basil</h5>
-                  <p>Some representative placeholder content for the second slide.</p>
                 </div>
               </div>
 
               <div class="carousel-item">
-                <img src="images/meatball.svg" class="d-block m-auto" width="200p" height="100px" alt="...">
+                <img src="images/3.jpg" class="d-block m-auto rounded" alt="...">
                 <div class=" d-none text-dark text-center d-md-block ">
-                  <h5>Non-Vegetarian</h5>
-                  <p>Some representative placeholder content for the second slide.</p>
                 </div>
               </div>
             </div>

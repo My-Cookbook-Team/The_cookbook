@@ -82,7 +82,7 @@ $result = mysqli_query($conn, $sql);
                                         <div class="btn-group">
 
                                             <a href="delete.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
-
+                                            <a href="update.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Update</button></a>
                                         </div>
                                         <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
                                     </div>
