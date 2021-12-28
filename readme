@@ -11,14 +11,14 @@ CREATE TABLE users (
 
 CREATE TABLE Recipe (
    rid MEDIUMINT not null AUTO_INCREMENT,   
-   username  varchar(40),
+   id  int(11) NOT NULL,
    rTitle varchar(100) not null,
    rServes int default null,
    HCookTime int default null,  /*for hours*/
    MCookTime int default null,  /*for minutes*/
    rcategory varchar(255) not null,
    primary key (rid), 
-   foreign key (username) references Users(username)
+   foreign key (id) references Users(id)
 )
 
 CREATE TABLE Ingredients (
