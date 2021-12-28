@@ -116,7 +116,7 @@ if ($conn->connect_error) {
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner p-5">
               <div class="carousel-item active">
-                <img src="images/1.jpg" class="d-block m-auto" alt="...">
+                <img src="images/1.jpg" class="d-block m-auto rounded" alt="...">
                 <div class=" d-none text-dark text-center d-md-block ">
                   <h5>&nbsp&nbsp&nbsp Poached Egg with herbs</h5>
                   <p>Some representative placeholder content for the second slide.</p>
@@ -125,7 +125,7 @@ if ($conn->connect_error) {
               </div>
 
               <div class="carousel-item">
-                <img src="images/2.jpg" class="d-block m-auto" alt="...">
+                <img src="images/2.jpg" class="d-block m-auto rounded" alt="...">
                 <div class=" d-none text-dark text-center d-md-block ">
                   <h5>Pasta With Tomato and Basil</h5>
                   <p>Some representative placeholder content for the second slide.</p>
