@@ -199,7 +199,7 @@ if (isset($_POST['checkout'])) {
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Instructions</label>
-                            <input type="text" class="form-control" name="steps" id="Instructions" placeholder="Instrcutions" required>
+                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="3" required></textarea>
 
                         </div>
                         <br>
