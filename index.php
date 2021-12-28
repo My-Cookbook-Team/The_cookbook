@@ -27,23 +27,6 @@ $conn = mysqli_connect('localhost', 'root', '', 'regis');
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-if (isset($_POST['veg'])) {
-  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
-  $result = mysqli_query($conn, $sql);
-}
-if (isset($_POST['nonveg'])) {
-  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
-  $result = mysqli_query($conn, $sql);
-}
-if (isset($_POST['drinks'])) {
-  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
-  $result = mysqli_query($conn, $sql);
-}
-if (isset($_POST['showall'])) {
-  $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe";
-  $result = mysqli_query($conn, $sql);
-}
-
 
 
 
