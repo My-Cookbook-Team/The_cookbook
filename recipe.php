@@ -8,8 +8,8 @@ if ($conn->connect_error) {
 // create sql
 
 //$sql = "SELECT rtitle FROM recipe where username='$username'";
-$sql = "SELECT rid,rtitle,hCookTime,mCookTime,rintro FROM recipe where username='$username'";
-$result = mysqli_query($conn, $sql);
+// $sql = "SELECT rid,rtitle,hCookTime,mCookTime,rintro FROM recipe where username='$username'";
+// $result = mysqli_query($conn, $sql);
 
 // save to db and check
 ?>
@@ -68,20 +68,19 @@ $result = mysqli_query($conn, $sql);
                 <!-- Cards start -->
 
                 <?php
-                if ($result && mysqli_num_rows($result) > 0) {
+                $sql = "SELECT r.rid,rtitle,username,rCookTimeh,rCookTimem, img_loc, rintro FROM recipe r,images i WHERE r.rid=i.rid AND username='$username';";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <div class="col">
                             <div class="card shadow-sm">
-
-                                <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
+                                <img src="<?php echo $row['img_loc']; ?>" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                                 <div class="card-body">
                                     <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
-                                    <p class="card-text"><?php echo $row["rintro"] ?>.</p>
+                                    <p class="card-text"><?php echo $row['rintro']; ?></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-
-                                            <a href="delete.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
-                                            <a href="update.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Update</button></a>
+                                            <small class="text-muted"><?php echo $row["username"] ?></small>
                                         </div>
                                         <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
                                     </div>

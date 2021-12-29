@@ -29,11 +29,13 @@ if (isset($_POST['checkout'])) {
     // save to db and check
     if (mysqli_query($conn, $sql)) {
         // success
+        $rid = $conn->insert_id; //retrieves the rid of the last recipe added
     } else {
         echo 'query error: ' . mysqli_error($conn);
     }
 
-    //query to retrieve rid
+    //query to retrieve rid. {$rid = $conn->insert_id;} does the same thing.
+    /*
     $sql2 = "SELECT rid FROM recipe 
     WHERE username =  '$username' AND rtitle = '$title' AND rServNum = '$servings' AND rCookTimeh = '$hpreptime' 
     AND rCookTimem = '$mpreptime' AND rcategory = '$category' AND steps = '$steps' AND rintro = '$intro'";
@@ -47,6 +49,7 @@ if (isset($_POST['checkout'])) {
     } else {
         echo 'query error: ' . mysqli_error($conn);
     }
+    */
 
 
     //to save image
@@ -194,12 +197,12 @@ if (isset($_POST['checkout'])) {
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Image</label>
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
+                                    <!-- <div class="input-group-prepend">
                                         <span class="input-group-text">Upload</span>
-                                    </div>
+                                    </div> -->
                                    
                                     <div class="custom-file">
-                                        <input type="file" name="image">
+                                        <input type="file" name="image" required>
                                             <label class="custom-file-label" for="inputGroupFile01"></label>
                                     </div>
 
@@ -269,7 +272,7 @@ if (isset($_POST['checkout'])) {
 
 
 
-                        <button class="w-50 btn btn-outline-primary btn-lg" name="checkout" type="submit">Checkout</button>
+                        <button class="w-50 btn btn-outline-primary btn-lg" name="checkout" type="submit">Submit</button>
                     </form>
                 </div>
 
