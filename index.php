@@ -76,6 +76,13 @@ if ($conn->connect_error) {
       margin-right: .75rem;
       margin-left: .75rem;
     }
+
+    .clipping {
+            width: 386px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
   </style>
 </head>
 
@@ -217,7 +224,7 @@ if ($conn->connect_error) {
                     <img src="<?php echo $row['img_loc']; ?>" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                     <div class="card-body">
                       <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
-                      <p class="card-text"><?php echo $row['rintro']; ?></p>
+                      <p class="card-text clipping"><?php echo $row['rintro']; ?></p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                           <small class="text-muted"><?php echo $row["username"] ?></small>
@@ -272,7 +279,7 @@ if ($conn->connect_error) {
                     <img src="<?php echo $row['img_loc']; ?>" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                     <div class="card-body">
                       <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
-                      <p class="card-text" id="clipping"><?php echo $row['rintro']; ?></p>
+                      <p class="card-text clipping"><?php echo $row['rintro']; ?></p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                           <small class="text-muted"><?php echo $row["username"] ?></small>
@@ -300,7 +307,7 @@ if ($conn->connect_error) {
                     <img src="<?php echo $row['img_loc']; ?>" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                     <div class="card-body">
                       <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
-                      <p class="card-text"><?php echo $row['rintro']; ?></p>
+                      <p class="card-text clipping"><?php echo $row['rintro']; ?></p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                           <small class="text-muted"><?php echo $row["username"] ?></small>
