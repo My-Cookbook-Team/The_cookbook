@@ -3,32 +3,63 @@ session_start();
 $conn = mysqli_connect('localhost', 'root', '', 'regis');
 
 $title = $servings = $preptime = $category = $steps = '';
-$id = $_GET['id'];
-if (isset($_POST['checkout2'])) {
+$rid = $_GET['id'];
+
+
+
+if (isset($_POST['update'])) {
 
 
     // escape sql chars
     $title = mysqli_real_escape_string($conn, $_POST['rtitle']);
     $author = mysqli_real_escape_string($conn, $_POST['username']);
     $servings = mysqli_real_escape_string($conn, $_POST['rServNum']);
-    $preptimeh = mysqli_real_escape_string($conn, $_POST['rCookTimeh']);
-    $preptimem = mysqli_real_escape_string($conn, $_POST['rCookTimem']);
+    $hpreptime = mysqli_real_escape_string($conn, $_POST['rCookTimeh']);
+    $mpreptime = mysqli_real_escape_string($conn, $_POST['rCookTimem']);
     $category = mysqli_real_escape_string($conn, $_POST['rcategory']);
+    $ingredients =  mysqli_real_escape_string($conn, $_POST['ingredients']);
     $steps = mysqli_real_escape_string($conn, $_POST['steps']);
     $intro =  mysqli_real_escape_string($conn, $_POST['rintro']);
+
 
     $username = $_SESSION['username'];
 
 
     // create sql
-    $sql = "UPDATE recipe SET rtitle='$title',rServNum='$servings',rCookTimeh='$preptimeh',rCookTimem='$preptimem',rcategory='$category',steps='$steps',rintro='$intro' WHERE rid=$id AND username=$username";
+    $sql = "UPDATE recipe
+    SET rtitle='$title', rServNum='$servings', rCookTimeh='$hpreptime', rCookTimem='$mpreptime, rcategory='$category', ingredients='$ingredient', steps='$steps', rintro='$intro') 
+    WHERE rid='$rid'";
 
     // save to db and check
     if (mysqli_query($conn, $sql)) {
         // success
-        header('Location: recipe.php');
     } else {
         echo 'query error: ' . mysqli_error($conn);
+    }
+
+    //update image in db
+
+    //to save image
+    //$sql = "INSERT INTO images(rid, img_loc) VALUES('rid','$dst_db')";
+    $var1 = rand(1111, 9999);  //generate random number in $var1 variable
+    $var2 = rand(1111, 9999);  // generate random number in $var2 variable
+
+    $var3 = $var1 . $var2;  // concatenate $var1 and $var2 in $var3
+    $var3 = md5($var3);   // convert $var3 using md5 function and generate 32 characters hex number
+
+    $fnm = $_FILES["image"]["name"];    // get the image name in $fnm variable
+    $dst = "./images/r_images/" . $var3 . $fnm;  // storing image path into the {r_images} folder with 32 characters hex number and file name
+    $dst_db = "images/r_images/" . $var3 . $fnm; // storing image path into the database with 32 characters hex number and file name
+
+    move_uploaded_file($_FILES["image"]["tmp_name"], $dst);  // move image into the {r_images} folder with 32 characters hex number and image name
+
+    $check = mysqli_query($conn, "UPDATE images SET img_loc='$dst_db' WHERE rid='$rid'");  // executing update query
+
+    if ($check) {
+        echo '<script type="text/javascript"> alert("Data Inserted Seccessfully!"); </script>';  // alert message
+        header('location: recipe.php');
+    } else {
+        echo '<script type="text/javascript"> alert("Error Uploading Data!"); </script>';  // when error occur
     }
 } // end POST check
 
@@ -146,9 +177,25 @@ if (isset($_POST['checkout2'])) {
             <div class="row g-5">
 
                 <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3 ">Update Recipe<?php echo " " . $id ?></h4>
-                    <form action="add.php" method="POST">
+                    <h4 class="mb-3 ">Recipe Details</h4>
+                    <form action="add.php" method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
+
+                            <div class="col-12">
+                                <label for="firstName" class="form-label">Image</label>
+                                <div class="input-group mb-3">
+                                    <!-- <div class="input-group-prepend">
+                                        <span class="input-group-text">Upload</span>
+                                    </div> -->
+                                   
+                                    <div class="custom-file">
+                                        <input type="file" name="image" required>
+                                            <label class="custom-file-label" for="inputGroupFile01"></label>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Recipe Title</label>
                                 <input type="text" class="form-control" name="rtitle" id="recipe_title" placeholder="" value="" required>
@@ -193,20 +240,26 @@ if (isset($_POST['checkout2'])) {
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Introduction Text</label>
-                            <input type="text" class="form-control" name="rintro" id="Intro" placeholder="Introduction" required>
+                            <textarea class="form-control " name="rintro" id="Introduction" placeholder="Introduction" rows="2" required></textarea>
+
+                        </div>
+                        <br>
+                        <div class="col-12">
+                            <label for="zip" class="form-label">Ingredients</label>
+                            <textarea class="form-control " name="ingredients" id="Ingredients" placeholder="Ingredients" rows="2" required></textarea>
 
                         </div>
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Instructions</label>
-                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="3" required></textarea>
+                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required></textarea>
 
                         </div>
                         <br>
 
 
 
-                        <button class="w-50 btn btn-outline-primary btn-lg" name="checkout2" type="submit">Update</button>
+                        <button class="w-50 btn btn-outline-primary btn-lg" name="update" type="submit">Submit</button>
                     </form>
                 </div>
 

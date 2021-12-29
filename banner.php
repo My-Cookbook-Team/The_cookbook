@@ -3,15 +3,13 @@
 // Starting the session, to use and
 // store data in session variable
 session_start();
-$id = $_GET['id'];
+$rid = $_GET['id'];
 
 $result;
 $conn = mysqli_connect('localhost', 'root', '', 'regis');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-
 
 ?>
 
@@ -59,11 +57,12 @@ if ($conn->connect_error) {
             margin-right: .75rem;
             margin-left: .75rem;
         }
+        
     </style>
 </head>
 
 <body>
-    <header class="p-3 bg-dark text-white">
+    <header class="p-3 bg-dark text-white top">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -89,25 +88,34 @@ if ($conn->connect_error) {
 
         <?php
 
-        $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem,rcategory,steps,rintro FROM recipe WHERE rid=$id";
+        $sql = "SELECT r.rid, rtitle, rservNum, username, rCookTimeh, rCookTimem, img_loc, rcategory, ingredients, steps, rintro FROM recipe r,images i WHERE r.rid=i.rid AND r.rid=$rid";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) { ?>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
-                        <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
+                <div class="col d-flex justify-content-center">
+                    <div class="card shadow-sm w-75 p-3 ">
+                        <img src="<?php echo $row['img_loc']; ?>" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="255" focusable="false">
                         <div class="card-body">
-                            <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
-                            <p class="card-text"></p>
+                            <h1 class="text-center"><?php echo $row["rtitle"] ?></h1>
+                            <p class="card-text"></p>   
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <small class="text-muted"><?php echo $row["username"] ?></small>
+                                    <small class="text-muted">By <?php echo $row["username"] ?></small>
                                 </div>
-                                <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
-                                <p><?php echo $row["rcategory"] ?></p>
+                                <small class="text-muted">Prep. time: <?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
+                                <small class="text-muted"><?php echo $row["rcategory"] ?></small>
                             </div>
+                            <p></p>
+                            <strong>Introduction:</strong>
+                            <br>
                             <p><?php echo $row["rintro"] ?></p>
+                            <br>
+                            <strong>Ingredients:</strong>
+                            <br>
+                            <p><?php echo $row["ingredients"] ?></p>
+                            <br>
+                            <strong>Steps:</strong>
+                            <br>
                             <p><?php echo $row["steps"] ?></p>
 
                         </div>

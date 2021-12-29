@@ -22,6 +22,7 @@ if ($conn->connect_error) {
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +33,13 @@ if ($conn->connect_error) {
         .add-rec {
             margin: 20px;
             margin-left: 100px;
+        }
+
+        .clipping {
+            width: 386px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
@@ -77,12 +85,15 @@ if ($conn->connect_error) {
                                 <img src="<?php echo $row['img_loc']; ?>" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                                 <div class="card-body">
                                     <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
-                                    <p class="card-text"><?php echo $row['rintro']; ?></p>
+                                    <p class="card-text clipping"><?php echo $row['rintro']; ?></p>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <small class="text-muted"><?php echo $row["username"] ?></small>
-                                        </div>
+
+                                        <small class="text-muted"><?php echo $row["username"] ?></small>
                                         <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="delete.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                                        <a href="update.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Update</button></a>
                                     </div>
                                 </div>
                             </div>
