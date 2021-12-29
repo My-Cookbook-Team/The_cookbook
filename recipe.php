@@ -75,7 +75,7 @@ $result = mysqli_query($conn, $sql);
 
                                 <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                                 <div class="card-body">
-                                    <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                                    <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
                                     <p class="card-text"><?php echo $row["rintro"] ?>.</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">

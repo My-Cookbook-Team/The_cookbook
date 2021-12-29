@@ -207,7 +207,7 @@ if ($conn->connect_error) {
           <!-- Cards start -->
           <?php
           if (isset($_POST['veg'])) {
-            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
+            $sql = "SELECT rid,rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Vegetarian'";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -216,7 +216,7 @@ if ($conn->connect_error) {
                     <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
                     <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                     <div class="card-body">
-                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
                       <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
@@ -235,7 +235,7 @@ if ($conn->connect_error) {
 
           <?php
           if (isset($_POST['nonveg'])) {
-            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Non Vegetarian'";
+            $sql = "SELECT rid,rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Non Vegetarian'";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -244,7 +244,7 @@ if ($conn->connect_error) {
                     <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
                     <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                     <div class="card-body">
-                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
                       <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
@@ -263,7 +263,7 @@ if ($conn->connect_error) {
 
           <?php
           if (isset($_POST['drinks'])) {
-            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Beverages'";
+            $sql = "SELECT rid,rtitle,username,rCookTimeh,rCookTimem FROM recipe where rcategory='Beverages'";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -272,7 +272,7 @@ if ($conn->connect_error) {
                     <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
                     <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                     <div class="card-body">
-                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
                       <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
@@ -291,7 +291,7 @@ if ($conn->connect_error) {
 
           <?php
           if (isset($_POST['showall'])) {
-            $sql = "SELECT rtitle,username,rCookTimeh,rCookTimem FROM recipe";
+            $sql = "SELECT rid,rtitle,username,rCookTimeh,rCookTimem FROM recipe";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -300,8 +300,8 @@ if ($conn->connect_error) {
                     <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Tumbnailh</text></svg> -->
                     <img src="images/fruit-basket.svg" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225" focusable="false">
                     <div class="card-body">
-                      <p class="fw-bold fs-5"><a href="#" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
+                      <p class="card-text"></p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                           <small class="text-muted"><?php echo $row["username"] ?></small>
