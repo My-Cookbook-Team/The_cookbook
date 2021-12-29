@@ -6,7 +6,6 @@ session_start();
 
 // Declaring and hoisting the variables
 $username = "";
-$email = "";
 $errors = array();
 $_SESSION['success'] = "";
 
@@ -125,7 +124,7 @@ if (isset($_POST['login_user'])) {
         } else {
 
             // If the username and password doesn't match
-            array_push($errors, "Username or password incorrect");
+            array_push($errors, "Incorrect username or password");
         }
     }
 }

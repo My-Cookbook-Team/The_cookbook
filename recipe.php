@@ -8,7 +8,7 @@ if ($conn->connect_error) {
 // create sql
 
 //$sql = "SELECT rtitle FROM recipe where username='$username'";
-$sql = "SELECT rid,rtitle,rCookTimeh,rCookTimem,rintro FROM recipe where username='$username'";
+$sql = "SELECT rid,rtitle,hCookTime,mCookTime,rintro FROM recipe where username='$username'";
 $result = mysqli_query($conn, $sql);
 
 // save to db and check
@@ -67,9 +67,8 @@ $result = mysqli_query($conn, $sql);
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <!-- Cards start -->
 
-
                 <?php
-                if (mysqli_num_rows($result) > 0) {
+                if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <div class="col">
                             <div class="card shadow-sm">

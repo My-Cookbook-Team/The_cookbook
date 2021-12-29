@@ -2,7 +2,7 @@
 session_start();
 $conn = mysqli_connect('localhost', 'root', '', 'regis');
 
-$title = $servings = $preptime = $category = $steps = '';
+$title = $servings = $mpreptime = $hpreptime = $category = $steps = $rintro = $ingredients = '';
 
 if (isset($_POST['checkout'])) {
 
@@ -11,24 +11,65 @@ if (isset($_POST['checkout'])) {
     $title = mysqli_real_escape_string($conn, $_POST['rtitle']);
     $author = mysqli_real_escape_string($conn, $_POST['username']);
     $servings = mysqli_real_escape_string($conn, $_POST['rServNum']);
-    $preptimeh = mysqli_real_escape_string($conn, $_POST['rCookTimeh']);
-    $preptimem = mysqli_real_escape_string($conn, $_POST['rCookTimem']);
+    $hpreptime = mysqli_real_escape_string($conn, $_POST['rCookTimeh']);
+    $mpreptime = mysqli_real_escape_string($conn, $_POST['rCookTimem']);
     $category = mysqli_real_escape_string($conn, $_POST['rcategory']);
+    $ingredients =  mysqli_real_escape_string($conn, $_POST['ingredients']);
     $steps = mysqli_real_escape_string($conn, $_POST['steps']);
     $intro =  mysqli_real_escape_string($conn, $_POST['rintro']);
+
 
     $username = $_SESSION['username'];
 
 
     // create sql
-    $sql = "INSERT INTO recipe(username ,rtitle,rServNum,rCookTimeh,rCookTimem,rcategory,steps,rintro) VALUES('$username','$title','$servings','$preptimeh','$preptimem','$category','$steps','$intro')";
+    $sql = "INSERT INTO recipe(username, rtitle, rServNum, rCookTimeh, rCookTimem, rcategory, ingredients, steps, rintro) 
+    VALUES('$username','$title','$servings','$hpreptime','$mpreptime','$category','$ingredients','$steps','$intro')";
 
     // save to db and check
     if (mysqli_query($conn, $sql)) {
         // success
-        header('Location: recipe.php');
     } else {
         echo 'query error: ' . mysqli_error($conn);
+    }
+
+    //query to retrieve rid
+    $sql2 = "SELECT rid FROM recipe 
+    WHERE username =  '$username' AND rtitle = '$title' AND rServNum = '$servings' AND rCookTimeh = '$hpreptime' 
+    AND rCookTimem = '$mpreptime' AND rcategory = '$category' AND steps = '$steps' AND rintro = '$intro'";
+
+    $result = mysqli_query($conn, $sql2);
+    if ($result && mysqli_num_rows($result) > 0) {
+        //success
+        //echo 'success.';
+    $row = mysqli_fetch_assoc($result);
+    $rid = $row["rid"];
+    } else {
+        echo 'query error: ' . mysqli_error($conn);
+    }
+
+
+    //to save image
+    //$sql = "INSERT INTO images(rid, img_loc) VALUES('rid','$dst_db')";
+    $var1 = rand(1111, 9999);  //generate random number in $var1 variable
+    $var2 = rand(1111, 9999);  // generate random number in $var2 variable
+
+    $var3 = $var1 . $var2;  // concatenate $var1 and $var2 in $var3
+    $var3 = md5($var3);   // convert $var3 using md5 function and generate 32 characters hex number
+
+    $fnm = $_FILES["image"]["name"];    // get the image name in $fnm variable
+    $dst = "./images/r_images/" . $var3 . $fnm;  // storing image path into the {r_images} folder with 32 characters hex number and file name
+    $dst_db = "images/r_images/" . $var3 . $fnm; // storing image path into the database with 32 characters hex number and file name
+
+    move_uploaded_file($_FILES["image"]["tmp_name"], $dst);  // move image into the {r_images} folder with 32 characters hex number and image name
+
+    $check = mysqli_query($conn, "insert into images(rid,img_loc) values('$rid','$dst_db')");  // executing insert query
+
+    if ($check) {
+        echo '<script type="text/javascript"> alert("Data Inserted Seccessfully!"); </script>';  // alert message
+        header('location: recipe.php');
+    } else {
+        echo '<script type="text/javascript"> alert("Error Uploading Data!"); </script>';  // when error occur
     }
 } // end POST check
 
@@ -147,8 +188,24 @@ if (isset($_POST['checkout'])) {
 
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3 ">Recipe Details</h4>
-                    <form action="add.php" method="POST">
+                    <form action="add.php" method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
+
+                            <div class="col-12">
+                                <label for="firstName" class="form-label">Image</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                   
+                                    <div class="custom-file">
+                                        <input type="file" name="image">
+                                            <label class="custom-file-label" for="inputGroupFile01"></label>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Recipe Title</label>
                                 <input type="text" class="form-control" name="rtitle" id="recipe_title" placeholder="" value="" required>
@@ -193,13 +250,19 @@ if (isset($_POST['checkout'])) {
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Introduction Text</label>
-                            <input type="text" class="form-control" name="rintro" id="Intro" placeholder="Introduction" required>
+                            <textarea class="form-control " name="rintro" id="Introduction" placeholder="Introduction" rows="2" required></textarea>
+
+                        </div>
+                        <br>
+                        <div class="col-12">
+                            <label for="zip" class="form-label">Ingredients</label>
+                            <textarea class="form-control " name="ingredients" id="Ingredients" placeholder="Ingredients" rows="2" required></textarea>
 
                         </div>
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Instructions</label>
-                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="3" required></textarea>
+                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required></textarea>
 
                         </div>
                         <br>
