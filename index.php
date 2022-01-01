@@ -78,11 +78,11 @@ if ($conn->connect_error) {
     }
 
     .clipping {
-            width: 386px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+      width: 386px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 
@@ -159,6 +159,7 @@ if ($conn->connect_error) {
 
       <!-- categories -->
       <div class="container marketing">
+        <h3 class="py-3 main-header text-decoration-underline">Browse</h3>
         <form action="index.php" method="post">
           <!-- Three columns of text below the carousel -->
           <div class="row">
@@ -167,19 +168,19 @@ if ($conn->connect_error) {
               <img src="images/fruit-basket.svg" class="d-block m-auto round" width="140" height="140" alt="...">
 
               <h2>Vegetarian</h2>
-              <button class="btn btn-secondary" name="veg" type="submit">Show Recipes&raquo;</button>
+              <button class="btn btn-outline-success" name="veg" type="submit">Show Recipes</button>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
               <img src="images/meatball.svg" class="d-block m-auto round" width="140" height="140" alt="...">
 
               <h2>Non Vegetarian</h2>
-              <button class="btn btn-secondary" name="nonveg" type="submit">Show Recipes&raquo;</button>
+              <button class="btn btn-outline-danger" name="nonveg" type="submit">Show Recipes</button>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
               <img src="images/drink.svg" class="d-block m-auto round" width="140" height="139" alt="...">
 
               <h2>Drinks</h2>
-              <button class="btn btn-secondary" name="drinks" type="submit">Show Recipes&raquo;</button>
+              <button class="btn btn-outline-primary" name="drinks" type="submit">Show Recipes</button>
             </div>
             <div class="col-lg-4">
 
@@ -188,26 +189,15 @@ if ($conn->connect_error) {
             <div class="col-lg-4">
 
 
-              <button class="btn btn-secondary" name="showall" type="submit">Show All</button>
+              <button class="btn btn-outline-secondary" name="showall" type="submit">Show All</button>
             </div>
             <!-- /.col-lg-4 -->
           </div><!-- /.row -->
-
         </form>
       </div>
-
-
-
-
-
-
-
-
-
-
     </div>
     <!-- section 3-cards -->
-    <h3 class="py-3 main-header text-decoration-underline">Browse</h3>
+
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

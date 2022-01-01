@@ -67,7 +67,7 @@ if ($conn->connect_error) {
     </header>
 
     <div class="add-rec d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a class="" href="add.php"><button type="button" class="btn btn-outline-dark me-2">Add Recipe</button></a>
+        <a class="" href="add.php"><button type="button" class="btn btn-outline-success me-2">Add Recipe</button></a>
     </div>
     <!-- section 2-cards -->
     <div class="album py-5 bg-light">
@@ -92,7 +92,7 @@ if ($conn->connect_error) {
                                         <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="delete.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                                        <a href="delete.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
                                         <a href="update.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Update</button></a>
                                     </div>
                                 </div>
