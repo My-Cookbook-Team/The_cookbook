@@ -39,7 +39,7 @@ if (isset($_POST['reg_user'])) {
     }
 
     if (strlen($password_1) < 8) {
-        array_push($errors, "User 8 characters or more for your password");
+        array_push($errors, "Use 8 characters or more for your password");
     }
 
     if ($password_1 != $password_2) {

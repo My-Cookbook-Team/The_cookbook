@@ -1,16 +1,32 @@
 <?php
 session_start();
+
+$rid = $_GET['id'];
+//echo $rid;
+
 $conn = mysqli_connect('localhost', 'root', '', 'regis');
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql_old = "SELECT r.rid, rtitle, rservNum, username, rCookTimeh, rCookTimem, img_loc, rcategory, ingredients, steps, rintro FROM recipe r,images i WHERE r.rid=i.rid AND r.rid=$rid";
+$result = mysqli_query($conn, $sql_old);
+$row_old = mysqli_fetch_assoc($result);
+$old_img =$row_old["img_loc"];
+
 
 $title = $servings = $preptime = $category = $steps = '';
-$rid = $_GET['id'];
 
 
+
+
+//
 
 if (isset($_POST['update'])) {
 
 
     // escape sql chars
+    $title = mysqli_real_escape_string($conn, $_POST['rtitle']);
     $title = mysqli_real_escape_string($conn, $_POST['rtitle']);
     $author = mysqli_real_escape_string($conn, $_POST['username']);
     $servings = mysqli_real_escape_string($conn, $_POST['rServNum']);
@@ -20,47 +36,64 @@ if (isset($_POST['update'])) {
     $ingredients =  mysqli_real_escape_string($conn, $_POST['ingredients']);
     $steps = mysqli_real_escape_string($conn, $_POST['steps']);
     $intro =  mysqli_real_escape_string($conn, $_POST['rintro']);
-
+    $fnm = $_FILES["image"]["name"];
 
     $username = $_SESSION['username'];
 
 
-    // create sql
-    $sql = "UPDATE recipe
-    SET rtitle='$title', rServNum='$servings', rCookTimeh='$hpreptime', rCookTimem='$mpreptime, rcategory='$category', ingredients='$ingredient', steps='$steps', rintro='$intro') 
-    WHERE rid='$rid'";
+    // update sql
+    $sql = "UPDATE recipe SET rtitle='$title', rServNum='$servings', rCookTimeh='$hpreptime', rCookTimem='$mpreptime', rcategory='$category', ingredients='$ingredients', steps='$steps', rintro='$intro'  WHERE rid=$rid";
+    //echo $sql;
 
-    // save to db and check
+    //for testing
+    // UPDATE recipe SET rtitle='kool', rServNum='5', rCookTimeh='6', rCookTimem='25', rcategory='Beverages', ingredients='sf', steps='lol', rintro='ok'  WHERE rid=65;
+    //works
+
+
+    // save to db and check 
     if (mysqli_query($conn, $sql)) {
         // success
+        //header('location: recipe.php');
     } else {
         echo 'query error: ' . mysqli_error($conn);
     }
 
+
     //update image in db
-
+    if ($fnm != ''){
     //to save image
-    //$sql = "INSERT INTO images(rid, img_loc) VALUES('rid','$dst_db')";
-    $var1 = rand(1111, 9999);  //generate random number in $var1 variable
-    $var2 = rand(1111, 9999);  // generate random number in $var2 variable
+    // keep as comment  -->$sql = "INSERT INTO images(rid, img_loc) VALUES('rid','$dst_db')";
 
-    $var3 = $var1 . $var2;  // concatenate $var1 and $var2 in $var3
-    $var3 = md5($var3);   // convert $var3 using md5 function and generate 32 characters hex number
+        $var1 = rand(1111, 9999);  //generate random number in $var1 variable
+        $var2 = rand(1111, 9999);  // generate random number in $var2 variable
 
-    $fnm = $_FILES["image"]["name"];    // get the image name in $fnm variable
-    $dst = "./images/r_images/" . $var3 . $fnm;  // storing image path into the {r_images} folder with 32 characters hex number and file name
-    $dst_db = "images/r_images/" . $var3 . $fnm; // storing image path into the database with 32 characters hex number and file name
+        $var3 = $var1 . $var2;  // concatenate $var1 and $var2 in $var3
+        $var3 = md5($var3);   // convert $var3 using md5 function and generate 32 characters hex number
 
-    move_uploaded_file($_FILES["image"]["tmp_name"], $dst);  // move image into the {r_images} folder with 32 characters hex number and image name
+        $fnm = $_FILES["image"]["name"];    // get the image name in $fnm variable
+        $dst = "./images/r_images/" . $var3 . $fnm;  // storing image path into the {r_images} folder with 32 characters hex number and file name
+        $dst_db = "images/r_images/" . $var3 . $fnm; // storing image path into the database with 32 characters hex number and file name
 
-    $check = mysqli_query($conn, "UPDATE images SET img_loc='$dst_db' WHERE rid='$rid'");  // executing update query
+        //delete old img
+        if (file_exists($old_img)) {
+            unlink($old_img);
+          } else {
+            echo 'Could not delete '.$old_img.', file does not exist';
+        }
 
-    if ($check) {
-        echo '<script type="text/javascript"> alert("Data Inserted Seccessfully!"); </script>';  // alert message
-        header('location: recipe.php');
-    } else {
-        echo '<script type="text/javascript"> alert("Error Uploading Data!"); </script>';  // when error occur
+
+        move_uploaded_file($_FILES["image"]["tmp_name"], $dst);  // move image into the {r_images} folder with 32 characters hex number and image name
+
+        $check = mysqli_query($conn, "UPDATE images SET img_loc='$dst_db' WHERE rid='$rid'");  // executing update query
+
+        if ($check) {
+            echo '<script type="text/javascript"> alert("Data Inserted Successfully!"); </script>';  // alert message
+            header('location: recipe.php');
+        } else {
+            echo '<script type="text/javascript"> alert("Error Uploading Data!"); </script>';  // when error occur
+        }
     }
+
 } // end POST check
 
 ?>
@@ -165,31 +198,31 @@ if (isset($_POST['update'])) {
 </header>
 
 <body class="bg-light">
-
     <div class="container">
+
         <main>
             <div class="py-5 text-center">
                 <img class="d-block mx-auto mb-4" src="images/drawing.svg" alt="" width="72" height="57">
                 <h2 class="main-header">The CookBook</h2>
                 <p class="lead"></p>
             </div>
-
+             
             <div class="row g-5">
 
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3 ">Recipe Details</h4>
-                    <form action="add.php" method="POST" enctype="multipart/form-data">
+                    <form action="update.php?id=<?php echo $rid; ?>" method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
 
                             <div class="col-12">
-                                <label for="firstName" class="form-label">Image</label>
+                                <label for="firstName" class="form-label">Image (optional)</label>
                                 <div class="input-group mb-3">
                                     <!-- <div class="input-group-prepend">
                                         <span class="input-group-text">Upload</span>
                                     </div> -->
                                    
                                     <div class="custom-file">
-                                        <input type="file" name="image" required>
+                                        <input type="file" name="image" accept="image/png, image/jpeg">
                                             <label class="custom-file-label" for="inputGroupFile01"></label>
                                     </div>
 
@@ -197,30 +230,55 @@ if (isset($_POST['update'])) {
                             </div>
 
                             <div class="col-12">
+                                
+                                
                                 <label for="firstName" class="form-label">Recipe Title</label>
-                                <input type="text" class="form-control" name="rtitle" id="recipe_title" placeholder="" value="" required>
+                                <input type="text" class="form-control" name="rtitle" id="recipe_title" placeholder="" value="<?php echo $row_old["rtitle"]; ?>" required>
 
                             </div>
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Recipe Author</label>
                                 <input type="text" class="form-control" name="username" id="recipe_author" placeholder="" value="<?php echo $_SESSION['username']; ?>" readonly>
-                                username
+
                             </div>
 
+                            <!-- to add "selected" in the option tag for Category list -->
+                            <?php 
+                            
+                            $veg_sel = $nveg_sel = $bev_sel = "";
+                            if ($row_old["rcategory"] = "Vegetarian") {
+                                $veg_sel = "selected";
+                            }
+                            if ($row_old["rcategory"] = "Non-Vegetarian" ) {
+                                $nveg_sel = "selected";
+                            }
+                            if ($row_old["rcategory"] = "Beverages") {
+                                $bev_sel = "selected";
+                            }
+                            
+                            ?>
+                            
+                            
                             <div class="col-md-4">
                                 <label for="state" class="form-label">Category</label>
                                 <select class="form-select" id="category" name="rcategory" required>
                                     <option value="">Choose...</option>
-                                    <option>Vegetarian</option>
-                                    <option>Non-Vegetarian</option>
-                                    <option>Beverages</option>
+                                    <option <?php echo $veg_sel ?> >Vegetarian</option>
+                                    <option <?php echo $nveg_sel ?> >Non-Vegetarian</option>
+                                    <option <?php echo $bev_sel ?> >Beverages</option>
                                 </select>
 
                             </div>
-
+                            <?php  
+                            // foreach($row_old as $key => $value) {
+                            //     echo "<br>";
+                            //     echo " $key: $value ";
+                            //   }
+                            ?>
+                            
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Servings</label>
-                                <input type="number" class="form-control" name="rServNum" id="serving" min="1" max="999" placeholder="" required>
+                                <input type="number" class="form-control" name="rServNum" id="serving" min="1" max="999" placeholder="" value="<?php echo $row_old['rservNum']; ?>" required>
 
                             </div>
                         </div>
@@ -228,31 +286,31 @@ if (isset($_POST['update'])) {
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Preparation Time</label>
-                                <input type="number" class="form-control" name="rCookTimeh" id="cooktime" min="0" max="23" placeholder="Hours" required>
+                                <input type="number" class="form-control" name="rCookTimeh" id="cooktime" min="0" max="23" placeholder="Hours" value="<?php echo $row_old['rCookTimeh']; ?>" required>
 
                             </div>
                             <div class="col-md-3">
                                 <label for="zip" class="form-label text-white">.</label>
-                                <input type="number" class="form-control" name="rCookTimem" id="prep_time_mins" min="0" max="59" placeholder="Minutes" required>
+                                <input type="number" class="form-control" name="rCookTimem" id="prep_time_mins" min="0" max="59" placeholder="Minutes" value="<?php echo $row_old['rCookTimem']; ?>" required>
                             </div>
 
                         </div>
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Introduction Text</label>
-                            <textarea class="form-control " name="rintro" id="Introduction" placeholder="Introduction" rows="2" required></textarea>
+                            <textarea class="form-control " name="rintro" id="Introduction" placeholder="Introduction" rows="2" required><?php echo $row_old['rintro']; ?></textarea>
 
                         </div>
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Ingredients</label>
-                            <textarea class="form-control " name="ingredients" id="Ingredients" placeholder="Ingredients" rows="2" required></textarea>
+                            <textarea class="form-control " name="ingredients" id="Ingredients" placeholder="Ingredients" rows="2" required><?php echo $row_old['ingredients']; ?></textarea>
 
                         </div>
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Instructions</label>
-                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required></textarea>
+                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required><?php echo $row_old['steps']; ?></textarea>
 
                         </div>
                         <br>
@@ -264,11 +322,12 @@ if (isset($_POST['update'])) {
                 </div>
 
             </div>
-        </main>
+        </main> 
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; Powered by a <a href="images/hamster.gif" target="_blank" rel="noopener noreferrer"> small hamster</a></p>
         </footer>
+        
     </div>
 
 

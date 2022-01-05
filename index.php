@@ -173,7 +173,7 @@ if ($conn->connect_error) {
             <div class="col-lg-4">
               <img src="images/meatball.svg" class="d-block m-auto round" width="140" height="140" alt="...">
 
-              <h2>Non Vegetarian</h2>
+              <h2>Non-Vegetarian</h2>
               <button class="btn btn-outline-danger" name="nonveg" type="submit">Show Recipes</button>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">

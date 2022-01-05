@@ -93,6 +93,7 @@ if ($conn->connect_error) {
                                     </div>
                                     <div class="btn-group">
                                         <a href="delete.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+                                        <span>&nbsp</span>
                                         <a href="update.php?id=<?php echo $row['rid']; ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Update</button></a>
                                     </div>
                                 </div>
@@ -105,6 +106,7 @@ if ($conn->connect_error) {
                     echo "You haven't added any Recipes";
                 }
                 ?>
+            
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 

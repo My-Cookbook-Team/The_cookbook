@@ -66,7 +66,7 @@ if (isset($_POST['checkout'])) {
 
     move_uploaded_file($_FILES["image"]["tmp_name"], $dst);  // move image into the {r_images} folder with 32 characters hex number and image name
 
-    $check = mysqli_query($conn, "insert into images(rid,img_loc) values('$rid','$dst_db')");  // executing insert query
+    $check = mysqli_query($conn, "INSERT INTO images(rid,img_loc) VALUES('$rid','$dst_db')");  // executing insert query
 
     if ($check) {
         echo '<script type="text/javascript"> alert("Data Inserted Seccessfully!"); </script>';  // alert message
@@ -202,7 +202,7 @@ if (isset($_POST['checkout'])) {
                                     </div> -->
                                    
                                     <div class="custom-file">
-                                        <input type="file" name="image" required>
+                                        <input type="file" name="image" accept="image/png, image/jpeg"required>
                                             <label class="custom-file-label" for="inputGroupFile01"></label>
                                     </div>
 
@@ -265,7 +265,11 @@ if (isset($_POST['checkout'])) {
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Instructions</label>
-                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required></textarea>
+                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required>STEP 1)
+STEP 2)
+.
+.
+.</textarea>
 
                         </div>
                         <br>
