@@ -17,14 +17,14 @@ $sql2 = "DELETE FROM images WHERE rid = $id";
 $sql_old = "SELECT img_loc FROM images WHERE rid = $id";
 $result = mysqli_query($conn, $sql_old);
 $row_old = mysqli_fetch_assoc($result);
-$old_img =$row_old["img_loc"];
+$old_img = $row_old["img_loc"];
 
 
 //delete old img
 if (file_exists($old_img)) {
     unlink($old_img);
-  } else {
-    echo 'Could not delete '.$old_img.', file does not exist';
+} else {
+    echo 'Could not delete ' . $old_img . ', file does not exist';
 }
 
 //delete recipe and image table entry

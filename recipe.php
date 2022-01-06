@@ -15,10 +15,6 @@ if ($conn->connect_error) {
 ?>
 
 
-
-
-
-
 <html lang="en">
 
 <head>
@@ -87,7 +83,7 @@ if ($conn->connect_error) {
                                     <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
                                     <p class="card-text clipping"><?php echo $row['rintro']; ?></p>
                                     <div class="d-flex justify-content-between align-items-center">
-                        
+
                                         <small class="text-muted"><?php echo $row["username"] ?></small>
                                         <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
                                     </div>
@@ -106,7 +102,7 @@ if ($conn->connect_error) {
                     echo "You haven't added any Recipes";
                 }
                 ?>
-            
+
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 

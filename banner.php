@@ -57,7 +57,6 @@ if ($conn->connect_error) {
             margin-right: .75rem;
             margin-left: .75rem;
         }
-        
     </style>
 </head>
 
@@ -97,7 +96,7 @@ if ($conn->connect_error) {
                         <img src="<?php echo $row['img_loc']; ?>" class="bd-placeholder-img card-img-top" alt="..." width="100%" height="255" focusable="false">
                         <div class="card-body">
                             <h1 class="text-center"><?php echo $row["rtitle"] ?></h1>
-                            <p class="card-text"></p>   
+                            <p class="card-text"></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <small class="text-muted">By <?php echo $row["username"] ?></small>

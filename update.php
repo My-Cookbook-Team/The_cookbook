@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 $sql_old = "SELECT r.rid, rtitle, rservNum, username, rCookTimeh, rCookTimem, img_loc, rcategory, ingredients, steps, rintro FROM recipe r,images i WHERE r.rid=i.rid AND r.rid=$rid";
 $result = mysqli_query($conn, $sql_old);
 $row_old = mysqli_fetch_assoc($result);
-$old_img =$row_old["img_loc"];
+$old_img = $row_old["img_loc"];
 
 
 $title = $servings = $preptime = $category = $steps = '';
@@ -53,8 +53,8 @@ if (isset($_POST['update'])) {
     // save to db and check 
     if (mysqli_query($conn, $sql)) {
         // success
-        if ($fnm == ''){
-        header('location: recipe.php');
+        if ($fnm == '') {
+            header('location: recipe.php');
         }
     } else {
         echo 'query error: ' . mysqli_error($conn);
@@ -62,9 +62,9 @@ if (isset($_POST['update'])) {
 
 
     //update image in db
-    if ($fnm != ''){
-    //to save image
-    // keep as comment  -->$sql = "INSERT INTO images(rid, img_loc) VALUES('rid','$dst_db')";
+    if ($fnm != '') {
+        //to save image
+        // keep as comment  -->$sql = "INSERT INTO images(rid, img_loc) VALUES('rid','$dst_db')";
 
         $var1 = rand(1111, 9999);  //generate random number in $var1 variable
         $var2 = rand(1111, 9999);  // generate random number in $var2 variable
@@ -79,8 +79,8 @@ if (isset($_POST['update'])) {
         //delete old img
         if (file_exists($old_img)) {
             unlink($old_img);
-          } else {
-            echo 'Could not delete '.$old_img.', file does not exist';
+        } else {
+            echo 'Could not delete ' . $old_img . ', file does not exist';
         }
 
 
@@ -95,7 +95,6 @@ if (isset($_POST['update'])) {
             echo '<script type="text/javascript"> alert("Error Uploading Data!"); </script>';  // when error occur
         }
     }
-
 } // end POST check
 
 ?>
@@ -208,7 +207,7 @@ if (isset($_POST['update'])) {
                 <h2 class="main-header">The CookBook</h2>
                 <p class="lead"></p>
             </div>
-             
+
             <div class="row g-5">
 
                 <div class="col-md-7 col-lg-8">
@@ -217,23 +216,29 @@ if (isset($_POST['update'])) {
                         <div class="row g-3">
 
                             <div class="col-12">
-                                <label for="firstName" class="form-label">Image (optional)</label>
+                                <label for="firstName" class="form-label">Images (optional)</label>
                                 <div class="input-group mb-3">
                                     <!-- <div class="input-group-prepend">
                                         <span class="input-group-text">Upload</span>
                                     </div> -->
-                                   
+
                                     <div class="custom-file">
                                         <input type="file" name="image" accept="image/png, image/jpeg">
-                                            <label class="custom-file-label" for="inputGroupFile01"></label>
+                                        <label class="custom-file-label" for="inputGroupFile01"></label>
                                     </div>
+
+                                    <!-- Second image file -->
+                                    <!-- <div class="custom-file">
+                                        <input type="file" name="image" accept="image/png, image/jpeg">
+                                        <label class="custom-file-label" for="inputGroupFile01"></label>
+                                    </div> -->
 
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                
-                                
+
+
                                 <label for="firstName" class="form-label">Recipe Title</label>
                                 <input type="text" class="form-control" name="rtitle" id="recipe_title" placeholder="" value="<?php echo $row_old["rtitle"]; ?>" required>
 
@@ -245,39 +250,42 @@ if (isset($_POST['update'])) {
                             </div>
 
                             <!-- to add "selected" in the option tag for Category list -->
-                            <?php 
-                            
+                            <?php
+
                             $veg_sel = $nveg_sel = $bev_sel = "";
-                            if ($row_old["rcategory"] = "Vegetarian") {
+                            //echo $veg_sel . " " . $nveg_sel . " " . $bev_sel;
+
+                            if ($row_old["rcategory"] == "Vegetarian") {
                                 $veg_sel = "selected";
                             }
-                            if ($row_old["rcategory"] = "Non-Vegetarian" ) {
+                            if ($row_old["rcategory"] == "Non-Vegetarian") {
                                 $nveg_sel = "selected";
                             }
-                            if ($row_old["rcategory"] = "Beverages") {
+                            if ($row_old["rcategory"] == "Beverages") {
                                 $bev_sel = "selected";
                             }
-                            
+
+                            //echo $veg_sel . " " . $nveg_sel . " " . $bev_sel;
                             ?>
-                            
-                            
+
+
                             <div class="col-md-4">
                                 <label for="state" class="form-label">Category</label>
                                 <select class="form-select" id="category" name="rcategory" required>
                                     <option value="">Choose...</option>
-                                    <option <?php echo $veg_sel ?> >Vegetarian</option>
-                                    <option <?php echo $nveg_sel ?> >Non-Vegetarian</option>
-                                    <option <?php echo $bev_sel ?> >Beverages</option>
+                                    <option <?php echo $veg_sel ?>>Vegetarian</option>
+                                    <option <?php echo $nveg_sel ?>>Non-Vegetarian</option>
+                                    <option <?php echo $bev_sel ?>>Beverages</option>
                                 </select>
 
                             </div>
-                            <?php  
+                            <?php
                             // foreach($row_old as $key => $value) {
                             //     echo "<br>";
                             //     echo " $key: $value ";
                             //   }
                             ?>
-                            
+
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Servings</label>
                                 <input type="number" class="form-control" name="rServNum" id="serving" min="1" max="999" placeholder="" value="<?php echo $row_old['rservNum']; ?>" required>
@@ -324,12 +332,12 @@ if (isset($_POST['update'])) {
                 </div>
 
             </div>
-        </main> 
+        </main>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; Powered by a <a href="images/hamster.gif" target="_blank" rel="noopener noreferrer"> small hamster</a></p>
         </footer>
-        
+
     </div>
 
 

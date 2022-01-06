@@ -171,10 +171,10 @@ if (isset($_POST['checkout'])) {
                 <li><a href="recipe.php" class="nav-link px-2 text-white">My Recipes</a></li>
 
             </ul>
-            
+
             <div class="text-start">
-                    <a class="" href="index.php?logout='1'"><button type="button" class="btn btn-outline-light me-2">Log out</button></a>
-                </div>
+                <a class="" href="index.php?logout='1'"><button type="button" class="btn btn-outline-light me-2">Log out</button></a>
+            </div>
 
 
         </div>
@@ -199,19 +199,27 @@ if (isset($_POST['checkout'])) {
                         <div class="row g-3">
 
                             <div class="col-12">
-                                <label for="firstName" class="form-label">Image</label>
+                                <label for="firstName" class="form-label">Images</label>
                                 <div class="input-group mb-3">
                                     <!-- <div class="input-group-prepend">
                                         <span class="input-group-text">Upload</span>
                                     </div> -->
-                                   
+
                                     <div class="custom-file">
-                                        <input type="file" name="image" accept="image/png, image/jpeg"required>
-                                            <label class="custom-file-label" for="inputGroupFile01"></label>
+                                        <input type="file" name="image" accept="image/png, image/jpeg" required>
+                                        <label class="custom-file-label" for="inputGroupFile01"></label>
                                     </div>
+                                    
+                                    <!-- Second image file -->
+                                    <!-- <div class="custom-file">
+                                        <input type="file" name="image" accept="image/png, image/jpeg" required>
+                                        <label class="custom-file-label" for="inputGroupFile01"></label>
+                                    </div> -->
 
                                 </div>
                             </div>
+
+                            
 
                             <div class="col-12">
                                 <label for="firstName" class="form-label">Recipe Title</label>
@@ -269,9 +277,9 @@ if (isset($_POST['checkout'])) {
                         <br>
                         <div class="col-12">
                             <label for="zip" class="form-label">Instructions</label>
-                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required>STEP 1)
-STEP 2)
-.
+                            <textarea class="form-control " name="steps" id="Instructions" placeholder="Instructions" rows="5" required>1.
+2.
+3.
 .
 .</textarea>
 
