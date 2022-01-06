@@ -171,6 +171,10 @@ if (isset($_POST['checkout'])) {
                 <li><a href="recipe.php" class="nav-link px-2 text-white">My Recipes</a></li>
 
             </ul>
+            
+            <div class="text-start">
+                    <a class="" href="index.php?logout='1'"><button type="button" class="btn btn-outline-light me-2">Log out</button></a>
+                </div>
 
 
         </div>

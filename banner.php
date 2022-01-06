@@ -103,7 +103,8 @@ if ($conn->connect_error) {
                                     <small class="text-muted">By <?php echo $row["username"] ?></small>
                                 </div>
                                 <small class="text-muted">Prep. time: <?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
-                                <small class="text-muted"><?php echo $row["rcategory"] ?></small>
+                                <small class="text-muted">Category: <?php echo $row["rcategory"] ?></small>
+                                <small class="text-muted">Servings: <?php echo $row["rservNum"] ?></small>
                             </div>
                             <p></p>
                             <strong>Introduction:</strong>

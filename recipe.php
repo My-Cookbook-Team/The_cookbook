@@ -87,7 +87,7 @@ if ($conn->connect_error) {
                                     <p class="fw-bold fs-5"><a href="banner.php?id=<?php echo $row['rid']; ?>" class="nav-link nav-link px-2 text-black"><?php echo $row["rtitle"] ?></a></p>
                                     <p class="card-text clipping"><?php echo $row['rintro']; ?></p>
                                     <div class="d-flex justify-content-between align-items-center">
-
+                        
                                         <small class="text-muted"><?php echo $row["username"] ?></small>
                                         <small class="text-muted"><?php echo $row["rCookTimeh"] . "h " . $row["rCookTimem"] . "m " ?></small>
                                     </div>

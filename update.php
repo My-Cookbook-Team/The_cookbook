@@ -53,7 +53,9 @@ if (isset($_POST['update'])) {
     // save to db and check 
     if (mysqli_query($conn, $sql)) {
         // success
-        //header('location: recipe.php');
+        if ($fnm == ''){
+        header('location: recipe.php');
+        }
     } else {
         echo 'query error: ' . mysqli_error($conn);
     }
